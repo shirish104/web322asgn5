@@ -23,12 +23,16 @@ const HTTP_PORT = process.env.PORT || 8080;
 
 app.use(express.static("public"));
 app.use('/data', express.static("data"));
-app.set('views', __dirname + '/views');
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, "/views/home.html"));
 });
 
+// using view engine like EJS:
+app.set('views', __dirname + '/views');
+
+//using static files (images, CSS, JS)
+app.use(express.static(__dirname + '/public'));
 
 app.get('/about', (req, res) => {
     res.sendFile(path.join(__dirname, "/views/about.html"));

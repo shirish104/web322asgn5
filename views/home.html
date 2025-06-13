@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Climate Solutions</title>
   <link href="/css/main.css" rel="stylesheet" />
 </head>
-<body class="bg-base-100 text-base-content">
 
-  <!-- Navbar -->
-  <div class="navbar bg-base-200 px-6">
+<body class="bg-base-200 text-base-content min-h-screen">
+
+  <header class="navbar bg-base-300 shadow-md px-6">
     <div class="flex-1">
-      <a class="btn btn-ghost text-xl" href="/">Climate Solutions</a>
+      <a class="btn btn-ghost normal-case text-xl" href="/">🌍 Climate Solutions</a>
     </div>
     <div class="flex-none">
       <ul class="menu menu-horizontal px-1">
@@ -19,7 +19,7 @@
         <li>
           <details>
             <summary>Sector</summary>
-            <ul class="p-2 bg-base-100 rounded-t-none">
+            <ul class="p-2 bg-base-200 rounded-box w-40">
               <li><a href="/solutions/projects?sector=energy">Energy</a></li>
               <li><a href="/solutions/projects?sector=transport">Transport</a></li>
               <li><a href="/solutions/projects?sector=industry">Industry</a></li>
@@ -28,25 +28,29 @@
         </li>
       </ul>
     </div>
-  </div>
+  </header>
 
-  <!-- Hero Section -->
-  <div class="container mx-auto my-8">
-    <div class="hero bg-base-200 rounded-lg p-8">
-      <div class="hero-content text-center">
-        <div class="max-w-md">
-          <h1 class="text-5xl font-bold">Explore Climate Projects</h1>
-          <p class="py-6">Real solutions to environmental challenges.</p>
-          <a href="/solutions/projects" class="btn btn-primary">Explore Projects</a>
-        </div>
+  <section class="hero bg-primary text-primary-content py-20">
+    <div class="hero-content text-center">
+      <div class="max-w-xl">
+        <h1 class="text-5xl font-bold">Build a Greener Future</h1>
+        <p class="py-6 text-lg">Explore real-world projects leading the way in climate innovation.</p>
+        <a href="/solutions/projects" class="btn btn-secondary hover:scale-105 transition duration-300 ease-in-out">
+          View Projects
+        </a>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Cards -->
-  <div class="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 pb-12" id="projectCards"></div>
+  
+  <section class="container mx-auto px-4 py-10">
+    <h2 class="text-3xl font-semibold mb-6 text-center">Featured Projects</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8" id="projectCards">
+      
+    </div>
+  </section>
 
-  <!-- Script to Load Cards -->
+  
   <script>
     fetch('/data/projectData.json')
       .then(res => res.json())
@@ -55,20 +59,32 @@
         const top3 = data.slice(0, 3);
         top3.forEach(project => {
           container.innerHTML += `
-            <div class="card bg-base-100 shadow-xl">
+            <div class="card bg-base-200 shadow-md hover:shadow-xl transition hover:scale-105">
               <figure><img src="${project.feature_img_url}" alt="${project.title}" class="h-48 w-full object-cover" /></figure>
               <div class="card-body">
                 <h2 class="card-title">${project.title}</h2>
                 <p>${project.summary_short}</p>
                 <div class="card-actions justify-end">
-                  <a href="/solutions/projects/${project.id}" class="btn btn-sm btn-primary">Details</a>
+                  <a href="/solutions/projects/${project.id}" class="btn btn-primary btn-sm">Details</a>
                 </div>
               </div>
             </div>
           `;
         });
+      })
+      .catch(err => {
+        document.getElementById('projectCards').innerHTML =
+          '<p class="text-red-500 col-span-3 text-center">Error loading projects.</p>';
+        console.error(err);
       });
   </script>
+
+
+  <footer class="footer items-center p-4 bg-base-300 text-base-content mt-10">
+    <div class="items-center grid-flow-col mx-auto">
+      <p>© 2025 Climate Solutions • Built for WEB322</p>
+    </div>
+  </footer>
 
 </body>
 </html>
