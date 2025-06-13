@@ -1,16 +1,18 @@
 /********************************************************************************
 *  WEB322 – Assignment 03
-*
+* 
 *  I declare that this assignment is my own work in accordance with Seneca's
 *  Academic Integrity Policy:
-*
+* 
 *  https://www.senecacollege.ca/about/policies/academic-integrity-policy.html
-*
-*  Name: Your Name   Student ID: 123456789   Date: 2025-06-12
+* 
+*  Name: Nirajan Magrati Student ID: 142798230 Date: 6/13/2025
 *
 *  Published URL: ___________________________________________________________
 *
 ********************************************************************************/
+
+
 
 const express = require('express');
 const path = require("path");
@@ -21,7 +23,7 @@ const HTTP_PORT = process.env.PORT || 8080;
 
 app.use(express.static("public"));
 app.use('/data', express.static("data"));
-
+app.set('views', __dirname + '/views');
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, "/views/home.html"));
