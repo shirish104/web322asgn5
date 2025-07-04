@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects | Climate Solutions</title>
+  <link href="/css/main.css" rel="stylesheet" />
+</head>
+
+<body class="bg-base-100 text-base-content">
+
+  <!-- Navbar -->
+  <%- include('partials/navbar', { page: '/solutions/projects' }) %>
+
+  <!-- Header Section -->
+  <section class="container mx-auto my-10">
+    <div class="hero bg-base-200 rounded-lg p-6 text-center">
+      <div class="hero-content flex flex-col">
+        <h1 class="text-4xl font-bold mb-4">Projects</h1>
+        <p class="mb-4">Explore innovative projects organized by environmental sector:</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/solutions/projects?sector=energy" class="btn btn-sm btn-outline">Energy</a>
+          <a href="/solutions/projects?sector=transport" class="btn btn-sm btn-outline">Transport</a>
+          <a href="/solutions/projects?sector=industry" class="btn btn-sm btn-outline">Industry</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Table -->
+  <section class="container mx-auto px-4 mb-10">
+    <div class="overflow-x-auto">
+      <table class="table table-zebra w-full">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Sector</th>
+            <th>Summary</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% projects.forEach(project => { %>
+            <tr>
+              <td><%= project.title %></td>
+              <td>
+                <a href="/solutions/projects?sector=<%= project.sector %>" class="btn btn-sm btn-ghost">
+                  <%= project.sector %>
+                </a>
+              </td>
+              <td><%= project.summary_short %></td>
+              <td>
+                <a href="/solutions/projects/<%= project.id %>" class="btn btn-sm btn-primary">Details</a>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</body>
+</html>
