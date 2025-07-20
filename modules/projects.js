@@ -1,16 +1,22 @@
 require('dotenv').config();
 const { Sequelize, DataTypes, Op } = require('sequelize');
 
-// Setup Sequelize connection (no SSL for local PostgreSQL)
+// Setup Sequelize connection with SSL support for Render.com
 const sequelize = new Sequelize(
   process.env.PGDATABASE,
   process.env.PGUSER,
   process.env.PGPASSWORD,
   {
     host: process.env.PGHOST,
-    port: 5432,
+    port: process.env.PGPORT || 5432,
     dialect: 'postgres',
-    logging: false, // cleaner output
+    logging: false,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
   }
 );
 
@@ -70,7 +76,7 @@ const Project = sequelize.define('Project', {
   timestamps: false,
 });
 
-// Project belongs to a Sector
+// Define association
 Project.belongsTo(Sector, { foreignKey: 'sector_id' });
 
 // CRUD operations
@@ -98,9 +104,9 @@ function getAllSectors() {
   return Sector.findAll();
 }
 
-// Exported DB initialization
+// Initialize DB
 function initDB() {
-  return sequelize.sync(); // this won't drop tables
+  return sequelize.sync(); // won't drop tables
 }
 
 module.exports = {
@@ -112,25 +118,3 @@ module.exports = {
   deleteProject,
   getAllSectors,
 };
-
-
-
-// sequelize.authenticate()
-//   .then(() => console.log('Connection has been established successfully.'))
-//   .catch(err => console.error('Unable to connect to the database:', err));
-
-// const projectData = require("../data/projectData");
-// const sectorData = require("../data/sectorData");
-
-// sequelize.sync({ force: true }) // drops and recreates both tables
-//   .then(() => {
-//     console.log('Database synced.');
-//     return Sector.bulkCreate(sectorData); //  insert sectors first
-//   })
-//   .then(() => Project.bulkCreate(projectData)) // then insert projects
-//   .then(() => {
-//     console.log("Data inserted successfully.");
-//   })
-//   .catch((err) => {
-//     console.error("Error inserting data:", err);
-//   });
