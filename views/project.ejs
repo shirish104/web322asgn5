@@ -19,7 +19,7 @@
         <div class="max-w-xl">
           <h1 class="text-4xl font-bold"><%= project.title %></h1>
           <p class="py-4 text-lg">
-            Below, you will find detailed information about the project: <strong><%= project.title %></strong>
+            Detailed information about the project: <strong><%= project.title %></strong>
           </p>
         </div>
       </div>
@@ -35,12 +35,21 @@
     </div>
 
     <!-- Project Info -->
-    <div class="space-y-4">
-      <h2 class="text-2xl font-semibold">Summary</h2>
-      <p class="text-lg"><%= project.intro_short %></p>
+    <div class="space-y-6">
+      <div>
+        <h2 class="text-2xl font-semibold">Sector</h2>
+        <p class="text-lg"><%= project.Sector.sector_name %></p>
+      </div>
 
-      <h2 class="text-2xl font-semibold">Impact</h2>
-      <p class="text-lg"><%= project.impact %></p>
+      <div>
+        <h2 class="text-2xl font-semibold">Summary</h2>
+        <p class="text-lg"><%= project.intro_short %></p>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-semibold">Impact</h2>
+        <p class="text-lg"><%= project.impact %></p>
+      </div>
 
       <a href="<%= project.original_source_url %>" target="_blank" class="btn btn-secondary mt-4">Learn More</a>
     </div>
@@ -50,7 +59,7 @@
   <!-- Quote Section -->
   <section class="container mx-auto px-4 py-10 text-center">
     <h2 class="text-2xl font-semibold mb-4">Inspired Words</h2>
-    <blockquote class="italic text-lg text-gray-700" id="quote"></blockquote>
+    <blockquote class="italic text-lg text-gray-700" id="quote">Loading quote...</blockquote>
     <p class="mt-2 font-semibold" id="author"></p>
   </section>
 

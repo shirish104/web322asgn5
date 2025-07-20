@@ -44,8 +44,8 @@
             <tr>
               <td><%= project.title %></td>
               <td>
-                <a href="/solutions/projects?sector=<%= project.sector %>" class="btn btn-sm btn-ghost">
-                  <%= project.sector %>
+                <a href="/solutions/projects?sector=<%= project.Sector.sector_name %>" class="btn btn-sm btn-ghost">
+                  <%= project.Sector.sector_name %>
                 </a>
               </td>
               <td><%= project.summary_short %></td>

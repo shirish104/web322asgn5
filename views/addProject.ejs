@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Add Project | Climate Solutions</title>
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body class="bg-base-100 text-base-content">
+
+  <!-- Navbar with Add Project highlighted -->
+  <%- include('partials/navbar', { page: '/solutions/addProject' }) %>
+
+  <!-- Add Project Header -->
+  <div class="hero bg-base-200 p-5">
+    <div class="hero-content text-center">
+      <div class="max-w-md">
+        <h1 class="text-5xl font-bold">Add Project</h1>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Project Form -->
+  <div class="p-5 max-w-md mx-auto">
+    <form action="/solutions/addProject" method="POST" class="space-y-4">
+      <input type="text" name="title" placeholder="Title" required class="input input-bordered w-full" />
+      <input type="url" name="feature_img_url" placeholder="Image URL" required class="input input-bordered w-full" />
+      <select name="sector_id" class="select select-bordered w-full" required>
+        <% sectors.forEach(sector => { %>
+          <option value="<%= sector.id %>"><%= sector.sector_name %></option>
+        <% }) %>
+      </select>
+      <textarea name="intro_short" placeholder="Intro" required class="textarea textarea-bordered w-full"></textarea>
+      <textarea name="summary_short" placeholder="Summary" required class="textarea textarea-bordered w-full"></textarea>
+      <textarea name="impact" placeholder="Impact" required class="textarea textarea-bordered w-full"></textarea>
+      <input type="url" name="original_source_url" placeholder="Source URL" required class="input input-bordered w-full" />
+      <button type="submit" class="btn btn-primary w-full">Add Project</button>
+    </form>
+  </div>
+
+</body>
+</html>
